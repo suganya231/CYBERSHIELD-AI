@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CyberShield AI - Live Chat</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #050505;
+            color: white;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 750px;
+            margin: 40px auto;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 25px;
+            text-align: center;
+            background: #181818;
+            border-bottom: 1px solid #333;
+        }
+
+        .chat-header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .chat-header p {
+            color: #aaa;
+        }
+
+        .messages {
+            height: 450px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            padding: 13px 16px;
+            border-radius: 10px;
+            background: #222;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: #252525;
+        }
+
+        .bot-message {
+            background: #191919;
+        }
+
+        .typing {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            background: #181818;
+            border-top: 1px solid #333;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        #sendButton {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #sendButton:disabled {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 600px) {
+
+            .chat-container {
+                width: 95%;
+                margin: 20px auto;
+            }
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            #sendButton {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+
+            <h1>🛡️ CyberShield AI</h1>
+
+            <p>Live AI Security Assistant</p>
+
+        </div>
+
+
+        <div class="messages" id="messages">
+
+            <div class="message bot-message">
+                🤖 Hello! I am CyberShield AI.
+                Ask me any question.
+            </div>
+
+        </div>
+
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Ask CyberShield AI anything..."
+            >
+
+            <button
+                type="button"
+                id="sendButton"
+            >
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const input =
+            document.getElementById("messageInput");
+
+        const sendButton =
+            document.getElementById("sendButton");
+
+        const messages =
+            document.getElementById("messages");
+
+
+        function addMessage(text, type) {
+
+            const message =
+                document.createElement("div");
+
+            message.className =
+                "message " + type;
+
+            message.textContent = text;
+
+            messages.appendChild(message);
+
+            messages.scrollTop =
+                messages.scrollHeight;
+        }
+
+
+        async function sendMessage() {
+
+            const text =
+                input.value.trim();
+
+            if (text === "") {
+                return;
+            }
+
+
+            addMessage(
+                "👤 " + text,
+                "user-message"
+            );
+
+
+            input.value = "";
+
+            sendButton.disabled = true;
+
+
+            const typing =
+                document.createElement("div");
+
+            typing.className =
+                "message bot-message typing";
+
+            typing.id = "typing";
+
+            typing.textContent =
+                "🤖 CyberShield AI is thinking...";
+
+            messages.appendChild(typing);
+
+
+            try {
+
+                const response =
+                    await fetch("/chat_api", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            message: text
+                        })
+
+                    });
+
+
+                const data =
+                    await response.json();
+
+
+                const oldTyping =
+                    document.getElementById("typing");
+
+                if (oldTyping) {
+                    oldTyping.remove();
+                }
+
+
+                if (data.success) {
+
+                    addMessage(
+                        "🤖 " + data.reply,
+                        "bot-message"
+                    );
+
+                } else {
+
+                    addMessage(
+                        "⚠️ " + data.reply,
+                        "bot-message"
+                    );
+
+                }
+
+            } catch (error) {
+
+                const oldTyping =
+                    document.getElementById("typing");
+
+                if (oldTyping) {
+                    oldTyping.remove();
+                }
+
+                addMessage(
+                    "⚠️ AI server connection failed.",
+                    "bot-message"
+                );
+            }
+
+
+            sendButton.disabled = false;
+
+            input.focus();
+        }
+
+
+        sendButton.addEventListener(
+            "click",
+            sendMessage
+        );
+
+
+        input.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

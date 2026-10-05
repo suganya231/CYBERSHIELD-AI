@@ -1,0 +1,1010 @@
+<!-- ================= CYBERSHIELD AI CHAT ================= -->
+
+<div id="cyberChat">
+
+    <!-- FLOATING BUTTON -->
+    <button id="cyberChatButton"
+            onclick="toggleCyberChat()"
+            title="CyberShield AI">
+
+        💬
+
+    </button>
+
+
+    <!-- CHAT WINDOW -->
+    <div id="cyberChatBox">
+
+        <!-- HEADER -->
+        <div class="cyberChatHeader">
+
+            <div>
+                🤖 <b>CyberShield AI</b>
+
+                <span id="voiceStatus">
+                    ● VOICE READY
+                </span>
+            </div>
+
+            <button onclick="closeCyberChat()">
+                ✕
+            </button>
+
+        </div>
+
+
+        <!-- CHAT MESSAGES -->
+        <div id="cyberMessages">
+
+            <div class="botMessage">
+
+                👋 Hello! I'm CyberShield AI.
+
+                <br><br>
+
+                How can I help you?
+
+                <br>
+
+                🎤 You can speak using the microphone.
+
+            </div>
+
+        </div>
+
+
+        <!-- INPUT -->
+        <div class="cyberInputArea">
+
+            <input
+                id="cyberInput"
+                type="text"
+                placeholder="Ask CyberShield AI..."
+                autocomplete="off"
+            >
+
+
+            <!-- VOICE BUTTON -->
+            <button
+                id="cyberMic"
+                onclick="startVoiceAssistant()"
+                title="Voice Assistant">
+
+                🎤
+
+            </button>
+
+
+            <!-- SEND -->
+            <button
+                id="cyberSend"
+                onclick="sendCyberMessage()"
+                title="Send">
+
+                ➤
+
+            </button>
+
+        </div>
+
+
+        <!-- STOP VOICE -->
+        <button
+            id="stopVoice"
+            onclick="stopAIVoice()">
+
+            🔇 Stop AI Voice
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<style>
+
+/* ================= FLOATING CHAT ================= */
+
+#cyberChat{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    z-index:99999;
+
+    font-family:Poppins,sans-serif;
+
+}
+
+
+/* ================= CHAT BUTTON ================= */
+
+#cyberChatButton{
+
+    width:62px;
+
+    height:62px;
+
+    border-radius:50%;
+
+    border:2px solid #00f5ff;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00f5ff,
+        #0066ff
+    );
+
+    color:white;
+
+    font-size:27px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 15px rgba(0,245,255,.8),
+    0 0 35px rgba(0,100,255,.4);
+
+    transition:.25s;
+
+}
+
+
+#cyberChatButton:hover{
+
+    transform:scale(1.1);
+
+}
+
+
+/* ================= CHAT BOX ================= */
+
+#cyberChatBox{
+
+    display:none;
+
+    position:absolute;
+
+    right:0;
+
+    bottom:75px;
+
+    width:360px;
+
+    height:480px;
+
+    background:#07111f;
+
+    border:1px solid #00f5ff;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    flex-direction:column;
+
+    box-shadow:
+    0 0 30px rgba(0,245,255,.45);
+
+}
+
+
+/* ================= HEADER ================= */
+
+.cyberChatHeader{
+
+    height:60px;
+
+    padding:10px 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:#101d30;
+
+    border-bottom:1px solid #00f5ff;
+
+    color:#00f5ff;
+
+}
+
+
+.cyberChatHeader b{
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:13px;
+
+}
+
+
+.cyberChatHeader span{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#00ffae;
+
+    font-size:8px;
+
+}
+
+
+.cyberChatHeader button{
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+
+/* ================= MESSAGES ================= */
+
+#cyberMessages{
+
+    flex:1;
+
+    padding:15px;
+
+    overflow-y:auto;
+
+}
+
+
+.botMessage{
+
+    width:fit-content;
+
+    max-width:85%;
+
+    padding:11px 13px;
+
+    margin-bottom:10px;
+
+    background:#172538;
+
+    border-left:3px solid #00f5ff;
+
+    border-radius:10px;
+
+    color:white;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+    white-space:pre-wrap;
+
+}
+
+
+.userMessage{
+
+    width:fit-content;
+
+    max-width:85%;
+
+    padding:11px 13px;
+
+    margin:8px 0 8px auto;
+
+    background:#006eff;
+
+    border-radius:10px;
+
+    color:white;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+    white-space:pre-wrap;
+
+}
+
+
+/* ================= INPUT ================= */
+
+.cyberInputArea{
+
+    display:flex;
+
+    gap:7px;
+
+    padding:10px;
+
+    border-top:1px solid #25364c;
+
+}
+
+
+#cyberInput{
+
+    flex:1;
+
+    min-width:0;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #30445d;
+
+    background:#080f19;
+
+    color:white;
+
+    outline:none;
+
+    font-size:12px;
+
+}
+
+
+#cyberInput:focus{
+
+    border-color:#00f5ff;
+
+}
+
+
+/* ================= MIC ================= */
+
+#cyberMic{
+
+    width:45px;
+
+    border-radius:10px;
+
+    border:1px solid #00f5ff;
+
+    background:#111e30;
+
+    color:#00f5ff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+
+#cyberMic:hover{
+
+    background:#00f5ff;
+
+    color:#001018;
+
+}
+
+
+/* ================= LISTENING ================= */
+
+#cyberMic.listening{
+
+    background:#ff1744;
+
+    border-color:#ff1744;
+
+    color:white;
+
+    animation:micPulse 1s infinite;
+
+}
+
+
+@keyframes micPulse{
+
+    0%{
+
+        box-shadow:
+        0 0 0 0 rgba(255,23,68,.7);
+
+    }
+
+    70%{
+
+        box-shadow:
+        0 0 0 12px rgba(255,23,68,0);
+
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 0 0 rgba(255,23,68,0);
+
+    }
+
+}
+
+
+/* ================= SEND ================= */
+
+#cyberSend{
+
+    width:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#00f5ff;
+
+    color:#001018;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+
+/* ================= STOP ================= */
+
+#stopVoice{
+
+    width:100%;
+
+    padding:7px;
+
+    border:none;
+
+    border-top:1px solid #1d3045;
+
+    background:#0c1725;
+
+    color:#ff7187;
+
+    font-size:10px;
+
+    cursor:pointer;
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:500px){
+
+    #cyberChat{
+
+        right:15px;
+
+        bottom:15px;
+
+    }
+
+    #cyberChatBox{
+
+        width:
+        calc(100vw - 30px);
+
+        height:470px;
+
+    }
+
+}
+
+</style>
+
+
+<script>
+
+/* ================================================= */
+/* VARIABLES */
+/* ================================================= */
+
+let voiceRecognition = null;
+
+let listening = false;
+
+
+/* ================================================= */
+/* OPEN CHAT */
+/* ================================================= */
+
+function toggleCyberChat(){
+
+    const box =
+        document.getElementById("cyberChatBox");
+
+
+    if(box.style.display === "flex"){
+
+        box.style.display = "none";
+
+    }
+
+    else{
+
+        box.style.display = "flex";
+
+        document
+        .getElementById("cyberInput")
+        .focus();
+
+    }
+
+}
+
+
+/* ================================================= */
+/* CLOSE CHAT */
+/* ================================================= */
+
+function closeCyberChat(){
+
+    document
+    .getElementById("cyberChatBox")
+    .style.display = "none";
+
+}
+
+
+/* ================================================= */
+/* SPEECH RECOGNITION */
+/* ================================================= */
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+if(SpeechRecognition){
+
+    voiceRecognition =
+        new SpeechRecognition();
+
+
+    voiceRecognition.continuous =
+        false;
+
+
+    voiceRecognition.interimResults =
+        false;
+
+
+    voiceRecognition.lang =
+        "en-IN";
+
+
+    /* START */
+
+    voiceRecognition.onstart =
+    function(){
+
+        listening = true;
+
+
+        document
+        .getElementById("cyberMic")
+        .classList
+        .add("listening");
+
+
+        document
+        .getElementById("voiceStatus")
+        .textContent =
+        "● LISTENING...";
+
+    };
+
+
+    /* RESULT */
+
+    voiceRecognition.onresult =
+    function(event){
+
+        const spokenText =
+            event
+            .results[0][0]
+            .transcript;
+
+
+        document
+        .getElementById("cyberInput")
+        .value =
+        spokenText;
+
+
+        document
+        .getElementById("voiceStatus")
+        .textContent =
+        "● PROCESSING...";
+
+
+        /* SEND AUTOMATICALLY */
+
+        sendCyberMessage();
+
+    };
+
+
+    /* ERROR */
+
+    voiceRecognition.onerror =
+    function(event){
+
+        console.log(
+            "Voice error:",
+            event.error
+        );
+
+
+        document
+        .getElementById("voiceStatus")
+        .textContent =
+        "● VOICE ERROR";
+
+    };
+
+
+    /* END */
+
+    voiceRecognition.onend =
+    function(){
+
+        listening = false;
+
+
+        document
+        .getElementById("cyberMic")
+        .classList
+        .remove("listening");
+
+
+        document
+        .getElementById("voiceStatus")
+        .textContent =
+        "● VOICE READY";
+
+    };
+
+}
+
+
+/* ================================================= */
+/* START VOICE ASSISTANT */
+/* ================================================= */
+
+function startVoiceAssistant(){
+
+    if(!voiceRecognition){
+
+        alert(
+            "Voice Assistant is not supported. Please use Google Chrome."
+        );
+
+        return;
+
+    }
+
+
+    if(listening){
+
+        voiceRecognition.stop();
+
+        return;
+
+    }
+
+
+    voiceRecognition.start();
+
+}
+
+
+/* ================================================= */
+/* STOP AI VOICE */
+/* ================================================= */
+
+function stopAIVoice(){
+
+    if(window.speechSynthesis){
+
+        window.speechSynthesis.cancel();
+
+    }
+
+
+    if(
+        voiceRecognition &&
+        listening
+    ){
+
+        voiceRecognition.stop();
+
+    }
+
+
+    document
+    .getElementById("voiceStatus")
+    .textContent =
+    "● VOICE READY";
+
+}
+
+
+/* ================================================= */
+/* AI SPEAK */
+/* ================================================= */
+
+function speakAI(text){
+
+    if(!window.speechSynthesis){
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+
+    speech.lang =
+        "en-IN";
+
+
+    speech.rate =
+        0.95;
+
+
+    speech.pitch =
+        1;
+
+
+    speech.onstart =
+    function(){
+
+        document
+        .getElementById("voiceStatus")
+        .textContent =
+        "● AI SPEAKING";
+
+    };
+
+
+    speech.onend =
+    function(){
+
+        document
+        .getElementById("voiceStatus")
+        .textContent =
+        "● VOICE READY";
+
+    };
+
+
+    window
+    .speechSynthesis
+    .speak(speech);
+
+}
+
+
+/* ================================================= */
+/* SEND MESSAGE TO EXISTING AI BACKEND */
+/* ================================================= */
+
+async function sendCyberMessage(){
+
+    const input =
+        document.getElementById("cyberInput");
+
+
+    const messages =
+        document.getElementById("cyberMessages");
+
+
+    const message =
+        input.value.trim();
+
+
+    if(!message){
+
+        return;
+
+    }
+
+
+    /* USER */
+
+    const user =
+        document.createElement("div");
+
+
+    user.className =
+        "userMessage";
+
+
+    user.textContent =
+        message;
+
+
+    messages.appendChild(user);
+
+
+    input.value = "";
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+    /* THINKING */
+
+    const thinking =
+        document.createElement("div");
+
+
+    thinking.className =
+        "botMessage";
+
+
+    thinking.textContent =
+        "🤖 CyberShield AI is thinking...";
+
+
+    messages.appendChild(thinking);
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+    try{
+
+        const response =
+            await fetch(
+                "/api/chat",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
+
+                    body:
+                    JSON.stringify({
+                        message:message
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        thinking.remove();
+
+
+        /* AI REPLY */
+
+        const bot =
+            document.createElement("div");
+
+
+        bot.className =
+            "botMessage";
+
+
+        const reply =
+            data.reply ||
+            "Sorry, I could not generate a response.";
+
+
+        bot.textContent =
+            reply;
+
+
+        messages.appendChild(bot);
+
+
+        /* SPEAK BUTTON */
+
+        const speakButton =
+            document.createElement("button");
+
+
+        speakButton.textContent =
+            "🔊 Speak";
+
+
+        speakButton.style.cssText =
+            `
+            display:block;
+            margin-top:7px;
+            padding:4px 8px;
+            border:1px solid #00f5ff;
+            border-radius:8px;
+            background:transparent;
+            color:#00f5ff;
+            cursor:pointer;
+            font-size:9px;
+            `;
+
+
+        speakButton.onclick =
+        function(){
+
+            speakAI(reply);
+
+        };
+
+
+        bot.appendChild(
+            speakButton
+        );
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        /* AUTOMATIC AI VOICE */
+
+        if(data.success){
+
+            speakAI(reply);
+
+        }
+
+    }
+
+    catch(error){
+
+        thinking.textContent =
+            "⚠️ AI connection error. Please check the Flask server.";
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ================================================= */
+/* ENTER KEY */
+/* ================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter" &&
+            document.activeElement.id ===
+            "cyberInput"
+        ){
+
+            sendCyberMessage();
+
+        }
+
+    }
+);
+
+</script>

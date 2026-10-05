@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>CYBERSHIELD AI v2.0</title>
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    min-height: 100vh;
+
+    font-family: 'Poppins', sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 15% 25%,
+            rgba(0, 180, 255, 0.10),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(0, 255, 180, 0.08),
+            transparent 35%
+        ),
+
+        #02070d;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   GRID BACKGROUND
+===================================================== */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+
+        linear-gradient(
+            rgba(0,245,255,0.025) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0,245,255,0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    z-index: -5;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+
+    width: 88%;
+
+    max-width: 1200px;
+
+    min-height: 90px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid rgba(0,245,255,0.18);
+
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+
+    text-decoration: none;
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #f0f7ff;
+
+    text-shadow:
+        0 0 10px rgba(0,245,255,0.25);
+}
+
+.logo span {
+
+    color: #00f5d4;
+
+    text-shadow:
+        0 0 12px #00f5d4;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+}
+
+.nav-links a {
+
+    text-decoration: none;
+
+    color: #a7c4d8;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+
+}
+
+.nav-links a:hover {
+
+    color: #00f5ff;
+
+    text-shadow:
+        0 0 10px #00f5ff;
+}
+
+
+/* =====================================================
+   HISTORY LINK
+===================================================== */
+
+.history-link {
+
+    color: #00ffc8 !important;
+
+    border:
+        1px solid rgba(0,255,200,0.45);
+
+    padding:
+        9px 14px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(0,255,200,0.04);
+
+}
+
+.history-link:hover {
+
+    background:
+        rgba(0,255,200,0.12);
+
+    box-shadow:
+        0 0 18px
+        rgba(0,255,200,0.25);
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.logout {
+
+    padding:
+        13px 25px;
+
+    border:
+        1px solid #00f5ff;
+
+    border-radius: 8px;
+
+    color: #b9eaff !important;
+
+    font-weight: 600;
+
+    background:
+        rgba(0,245,255,0.02);
+
+}
+
+.logout:hover {
+
+    background: #00f5ff;
+
+    color: #001015 !important;
+
+    box-shadow:
+        0 0 25px
+        rgba(0,245,255,0.45);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    min-height:
+        calc(100vh - 90px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding-top: 25px;
+
+    position: relative;
+
+}
+
+
+/* =====================================================
+   SIDE LIGHTS
+===================================================== */
+
+.side-light-left {
+
+    position: absolute;
+
+    left: -100px;
+
+    top: 300px;
+
+    width: 300px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #00f5ff
+        );
+
+    box-shadow:
+        0 0 15px #00f5ff;
+
+    transform:
+        rotate(-25deg);
+}
+
+
+.side-light-right {
+
+    position: absolute;
+
+    right: -100px;
+
+    top: 300px;
+
+    width: 300px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00f5ff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px #00f5ff;
+
+    transform:
+        rotate(25deg);
+}
+
+
+/* =====================================================
+   AI SHIELD
+===================================================== */
+
+.ai-container {
+
+    width: 210px;
+
+    height: 185px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* OUTER CIRCLE */
+
+.ai-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 175px;
+
+    height: 175px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(0,245,255,0.30);
+
+    box-shadow:
+
+        0 0 20px
+        rgba(0,245,255,0.15),
+
+        inset 0 0 25px
+        rgba(0,245,255,0.08);
+
+    animation:
+        rotateCircle 12s linear infinite;
+}
+
+
+/* SECOND CIRCLE */
+
+.ai-container::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 155px;
+
+    height: 155px;
+
+    border-radius: 50%;
+
+    border:
+        1px dashed
+        rgba(0,255,200,0.35);
+
+    animation:
+        rotateCircleReverse 8s linear infinite;
+}
+
+
+/* =====================================================
+   ROTATING RING
+===================================================== */
+
+.ai-ring {
+
+    position: absolute;
+
+    width: 215px;
+
+    height: 75px;
+
+    border:
+        3px solid #00f5ff;
+
+    border-left-color:
+        transparent;
+
+    border-right-color:
+        transparent;
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-15deg);
+
+    box-shadow:
+
+        0 0 10px #00f5ff,
+
+        0 0 25px
+        rgba(0,245,255,0.4);
+
+    animation:
+        orbit 5s linear infinite;
+}
+
+
+/* =====================================================
+   SHIELD
+===================================================== */
+
+.shield {
+
+    width: 118px;
+
+    height: 138px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #071b2a,
+            #02080e
+        );
+
+    clip-path:
+        polygon(
+            50% 0%,
+            93% 17%,
+            89% 66%,
+            75% 87%,
+            50% 100%,
+            25% 87%,
+            11% 66%,
+            7% 17%
+        );
+
+    filter:
+        drop-shadow(
+            0 0 8px #00f5ff
+        )
+
+        drop-shadow(
+            0 0 25px
+            rgba(0,245,255,0.45)
+        );
+}
+
+
+/* SHIELD BORDER */
+
+.shield-border {
+
+    position: absolute;
+
+    inset: 0;
+
+    border:
+        4px solid #00eaff;
+
+    clip-path:
+        polygon(
+            50% 0%,
+            93% 17%,
+            89% 66%,
+            75% 87%,
+            50% 100%,
+            25% 87%,
+            11% 66%,
+            7% 17%
+        );
+}
+
+
+/* =====================================================
+   AI CORE
+===================================================== */
+
+.ai-core {
+
+    width: 68px;
+
+    height: 68px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 5;
+
+    background:
+        radial-gradient(
+            circle,
+            #073448,
+            #020c14
+        );
+
+    border:
+        2px solid #00ffc8;
+
+    box-shadow:
+
+        0 0 12px #00ffc8,
+
+        0 0 30px
+        rgba(0,255,200,0.45),
+
+        inset 0 0 20px
+        rgba(0,255,200,0.25);
+}
+
+
+/* AI TEXT */
+
+.ai-text {
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    color: white;
+
+    text-shadow:
+
+        0 0 7px #00f5ff,
+
+        0 0 18px #00ffc8;
+}
+
+
+/* =====================================================
+   CIRCUIT NODES
+===================================================== */
+
+.circuit-node {
+
+    position: absolute;
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #00f5ff;
+
+    box-shadow:
+        0 0 10px #00f5ff;
+}
+
+.node1 {
+
+    top: 45px;
+
+    left: 25px;
+}
+
+.node2 {
+
+    top: 38px;
+
+    right: 25px;
+}
+
+.node3 {
+
+    bottom: 40px;
+
+    left: 29px;
+}
+
+.node4 {
+
+    bottom: 30px;
+
+    right: 30px;
+}
+
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+.badges {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top: 3px;
+
+    margin-bottom: 27px;
+}
+
+
+.badge {
+
+    padding:
+        9px 16px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid
+        rgba(0,255,200,0.40);
+
+    background:
+        rgba(0,255,200,0.025);
+
+    color: #00ffc8;
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 0 8px
+        rgba(0,255,200,0.08);
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title {
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        clamp(48px, 8vw, 88px);
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    color: #eaf5ff;
+
+    margin-bottom: 27px;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,255,255,0.12);
+}
+
+
+.title .green {
+
+    color: #00ffc8;
+
+    text-shadow:
+
+        0 0 10px #00ffc8,
+
+        0 0 28px
+        rgba(0,255,200,0.35);
+}
+
+
+/* =====================================================
+   SUBTITLE
+===================================================== */
+
+.subtitle {
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size: 17px;
+
+    color: #8db4cc;
+
+    margin-bottom: 8px;
+}
+
+
+.description {
+
+    max-width: 720px;
+
+    font-size: 16px;
+
+    line-height: 1.9;
+
+    color: #9ab5c8;
+
+    margin-bottom: 34px;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.buttons {
+
+    display: flex;
+
+    gap: 15px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+
+.btn {
+
+    min-width: 195px;
+
+    padding:
+        16px 24px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+.explore-btn {
+
+    color: #00110d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00ffc8,
+            #00e6cf
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(0,255,200,0.18);
+}
+
+
+.explore-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 0 30px
+        rgba(0,255,200,0.45);
+}
+
+
+.dashboard-btn {
+
+    color: #00ffc8;
+
+    border:
+        1px solid #00f5ff;
+
+    background:
+        rgba(0,245,255,0.02);
+}
+
+
+.dashboard-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        rgba(0,245,255,0.08);
+
+    box-shadow:
+        0 0 20px
+        rgba(0,245,255,0.20);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #526d7e;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes rotateCircle {
+
+    from {
+        transform:
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+
+@keyframes rotateCircleReverse {
+
+    from {
+        transform:
+            rotate(360deg);
+    }
+
+    to {
+        transform:
+            rotate(0deg);
+    }
+
+}
+
+
+@keyframes orbit {
+
+    0% {
+
+        transform:
+            rotate(-15deg)
+            scaleX(1);
+    }
+
+    50% {
+
+        transform:
+            rotate(15deg)
+            scaleX(1.08);
+    }
+
+    100% {
+
+        transform:
+            rotate(-15deg)
+            scaleX(1);
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width: 700px) {
+
+    .navbar {
+
+        width: 92%;
+
+        height: auto;
+
+        padding: 20px 0;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+
+    .nav-links {
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .nav-links a {
+
+        font-size: 12px;
+    }
+
+
+    .logout {
+
+        padding:
+            9px 15px;
+    }
+
+
+    .history-link {
+
+        padding:
+            8px 12px;
+    }
+
+
+    .hero {
+
+        padding:
+            25px 15px 50px;
+    }
+
+
+    .ai-container {
+
+        transform:
+            scale(0.85);
+
+        margin-bottom: 0;
+    }
+
+
+    .title {
+
+        font-size: 45px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .subtitle {
+
+        font-size: 13px;
+    }
+
+
+    .description {
+
+        font-size: 13px;
+    }
+
+
+    .btn {
+
+        width: 280px;
+    }
+
+
+    .side-light-left,
+    .side-light-right {
+
+        display: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header class="navbar">
+
+
+    <!-- LOGO -->
+
+    <a href="{{ url_for('index') }}"
+    <a href="/search_history">SEARCH HISTORY</a>
+       class="logo">
+
+        CYBER<span>SHIELD</span> AI
+
+    </a>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="nav-links">
+
+
+        <a href="{{ url_for('tools') }}">
+            Explore
+        </a>
+
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+
+        <!-- SEARCH HISTORY -->
+
+        <a href="{{ url_for('history_page') }}"
+           class="history-link">
+
+            🕘 History
+
+        </a>
+
+
+        <a href="{{ url_for('chat') }}">
+            AI Chat
+        </a>
+
+
+        <a href="{{ url_for('logout') }}"
+           class="logout">
+
+            Logout
+
+        </a>
+
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+
+    <!-- SIDE LIGHTS -->
+
+    <div class="side-light-left"></div>
+
+    <div class="side-light-right"></div>
+
+
+
+    <!-- =================================================
+         AI SHIELD SYMBOL
+    ================================================== -->
+
+    <div class="ai-container">
+
+
+        <div class="ai-ring"></div>
+
+
+        <div class="shield">
+
+
+            <div class="shield-border"></div>
+
+
+            <div class="ai-core">
+
+                <span class="ai-text">
+                    AI
+                </span>
+
+            </div>
+
+
+            <span class="circuit-node node1"></span>
+
+            <span class="circuit-node node2"></span>
+
+            <span class="circuit-node node3"></span>
+
+            <span class="circuit-node node4"></span>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY BADGES
+    ================================================== -->
+
+    <div class="badges">
+
+
+        <div class="badge">
+
+            🔐 AES-256 ENCRYPTED
+
+        </div>
+
+
+        <div class="badge">
+
+            🤖 AI POWERED
+
+        </div>
+
+
+        <div class="badge">
+
+            ⚡ REAL-TIME SCAN
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         MAIN TITLE
+    ================================================== -->
+
+    <h1 class="title">
+
+        CYBER<span class="green">SHIELD</span> AI
+
+    </h1>
+
+
+
+    <div class="subtitle">
+
+        ADVANCED THREAT DETECTION SYSTEM
+
+    </div>
+
+
+
+    <p class="description">
+
+        Protect your digital identity with
+        AI-powered cybersecurity analysis
+        and security awareness tools.
+
+    </p>
+
+
+
+    <!-- =================================================
+         BUTTONS
+    ================================================== -->
+
+    <div class="buttons">
+
+
+        <a href="{{ url_for('tools') }}"
+           class="btn explore-btn">
+
+            EXPLORE CYBERSHIELD →
+
+        </a>
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="btn dashboard-btn">
+
+            VIEW DASHBOARD
+
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <p>
+
+        CYBERSHIELD AI v2.0
+        • Advanced Threat Detection System
+
+    </p>
+
+
+    <p style="margin-top:8px;">
+
+        Built with Python • Flask • Scikit-Learn
+
+    </p>
+
+</footer>
+
+
+
+</body>
+
+</html>

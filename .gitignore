@@ -1,0 +1,6 @@
+__pycache__/
+*.db
+*.pkl
+logins.txt
+fix.py
+venv/

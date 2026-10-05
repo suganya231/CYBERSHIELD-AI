@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CyberShield AI - Search History</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    min-height: 100vh;
+
+    font-family: 'Poppins', sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(0,245,255,0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(0,255,200,0.08),
+            transparent 30%
+        ),
+        #02070d;
+
+}
+
+
+/* =========================
+   GRID BACKGROUND
+========================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(0,245,255,0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,245,255,0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    z-index: -1;
+
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    width: 88%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    min-height: 85px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid rgba(0,245,255,0.18);
+
+}
+
+
+.logo {
+
+    text-decoration: none;
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: white;
+
+}
+
+
+.logo span {
+
+    color: #00ffc8;
+
+    text-shadow:
+        0 0 12px #00ffc8;
+
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+}
+
+
+.nav-links a {
+
+    text-decoration: none;
+
+    color: #9eb9ca;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+
+}
+
+
+.nav-links a:hover {
+
+    color: #00ffc8;
+
+}
+
+
+.logout {
+
+    padding: 10px 20px;
+
+    border: 1px solid #00ffc8;
+
+    border-radius: 7px;
+
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+
+    width: 90%;
+
+    max-width: 1150px;
+
+    margin: 45px auto 80px;
+
+}
+
+
+.heading {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.heading h1 {
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 40px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.heading h1 span {
+
+    color: #00ffc8;
+
+    text-shadow:
+        0 0 15px #00ffc8;
+
+}
+
+
+.heading p {
+
+    margin-top: 10px;
+
+    color: #7893a6;
+
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 25px;
+
+}
+
+
+.filter {
+
+    text-decoration: none;
+
+    color: #9eb9ca;
+
+    padding: 10px 18px;
+
+    border-radius: 25px;
+
+    border:
+        1px solid rgba(0,245,255,0.25);
+
+    background:
+        rgba(0,245,255,0.03);
+
+    font-size: 13px;
+
+    transition: 0.3s;
+
+}
+
+
+.filter:hover {
+
+    color: #00110d;
+
+    background: #00ffc8;
+
+    border-color: #00ffc8;
+
+}
+
+
+/* =========================
+   SEARCH BOX
+========================= */
+
+.search-area {
+
+    max-width: 700px;
+
+    margin: 0 auto 25px;
+
+    display: flex;
+
+}
+
+
+.search-area input {
+
+    flex: 1;
+
+    height: 50px;
+
+    padding: 0 18px;
+
+    outline: none;
+
+    color: white;
+
+    background: #06121c;
+
+    border:
+        1px solid rgba(0,245,255,0.25);
+
+    border-right: none;
+
+    border-radius: 8px 0 0 8px;
+
+    font-family: Poppins, sans-serif;
+
+}
+
+
+.search-area input:focus {
+
+    border-color: #00ffc8;
+
+}
+
+
+.search-area button {
+
+    height: 50px;
+
+    padding: 0 22px;
+
+    border: none;
+
+    background: #00ffc8;
+
+    color: #00110d;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    border-radius: 0 8px 8px 0;
+
+}
+
+
+/* =========================
+   CLEAR BUTTON
+========================= */
+
+.actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-bottom: 20px;
+
+}
+
+
+.clear-btn {
+
+    padding: 10px 18px;
+
+    background:
+        rgba(255,60,80,0.07);
+
+    border:
+        1px solid rgba(255,60,80,0.45);
+
+    color: #ff7182;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-family: Poppins, sans-serif;
+
+}
+
+
+.clear-btn:hover {
+
+    background:
+        rgba(255,60,80,0.15);
+
+}
+
+
+/* =========================
+   HISTORY CARD
+========================= */
+
+.history-card {
+
+    background:
+        rgba(5,20,30,0.80);
+
+    border:
+        1px solid rgba(0,245,255,0.14);
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    margin-bottom: 15px;
+
+    transition: 0.3s;
+
+}
+
+
+.history-card:hover {
+
+    border-color:
+        rgba(0,255,200,0.45);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,255,200,0.06);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.card-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.tool-name {
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size: 13px;
+
+    color: #00ffc8;
+
+}
+
+
+.date {
+
+    color: #607b8d;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input-title {
+
+    color: #5f7c8e;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 5px;
+
+}
+
+
+.input-value {
+
+    background: #02080e;
+
+    border:
+        1px solid rgba(0,245,255,0.08);
+
+    border-radius: 7px;
+
+    padding: 13px;
+
+    color: #c7e7f2;
+
+    word-break: break-word;
+
+    margin-bottom: 14px;
+
+}
+
+
+/* =========================
+   RESULT GRID
+========================= */
+
+.result-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+}
+
+
+.result-box {
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(0,245,255,0.025);
+
+    border:
+        1px solid rgba(0,245,255,0.08);
+
+}
+
+
+.result-label {
+
+    color: #5d7889;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+}
+
+
+.result-value {
+
+    color: #c6eaf4;
+
+    font-size: 13px;
+
+    margin-top: 4px;
+
+    word-break: break-word;
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+.delete-form {
+
+    margin-top: 14px;
+
+}
+
+
+.delete-btn {
+
+    padding: 8px 15px;
+
+    background: transparent;
+
+    border:
+        1px solid rgba(255,70,90,0.40);
+
+    color: #ff7182;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+}
+
+
+.delete-btn:hover {
+
+    background:
+        rgba(255,70,90,0.10);
+
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty {
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    border:
+        1px dashed rgba(0,245,255,0.18);
+
+    border-radius: 14px;
+
+    color: #60798a;
+
+}
+
+
+.empty-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px) {
+
+    .navbar {
+
+        width: 92%;
+
+        padding: 18px 0;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+    .nav-links {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 12px;
+
+    }
+
+    .heading h1 {
+
+        font-size: 28px;
+
+    }
+
+    .result-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <a href="{{ url_for('index') }}"
+       class="logo">
+
+        CYBER<span>SHIELD</span> AI
+
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('tools') }}">
+            Explore
+        </a>
+
+        <a href="{{ url_for('history_page') }}">
+            History
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('chat') }}">
+            AI Chat
+        </a>
+
+        <a href="{{ url_for('logout') }}"
+           class="logout">
+
+            Logout
+
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+    <section class="heading">
+
+        <h1>
+            SEARCH <span>HISTORY</span>
+        </h1>
+
+        <p>
+            View your previous CyberShield AI security scans
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         FILTERS
+    ========================= -->
+
+    <div class="filters">
+
+        <a class="filter"
+           href="{{ url_for('history_page') }}">
+
+            🕒 ALL
+
+        </a>
+
+
+        <a class="filter"
+           href="{{ url_for('history_page', tool='PASSWORD') }}">
+
+            🔐 PASSWORD
+
+        </a>
+
+
+        <a class="filter"
+           href="{{ url_for('history_page', tool='URL') }}">
+
+            🌐 URL
+
+        </a>
+
+
+        <a class="filter"
+           href="{{ url_for('history_page', tool='EMAIL') }}">
+
+            📧 EMAIL
+
+        </a>
+
+
+        <a class="filter"
+           href="{{ url_for('history_page', tool='IMAGE') }}">
+
+            🖼️ IMAGE
+
+        </a>
+
+
+        <a class="filter"
+           href="{{ url_for('history_page', tool='CHAT') }}">
+
+            🤖 AI CHAT
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         SEARCH
+    ========================= -->
+
+    <form class="search-area"
+          method="GET"
+          action="{{ url_for('history_page') }}">
+
+        <input
+            type="text"
+            name="q"
+            value="{{ request.args.get('q', '') }}"
+            placeholder="Search your history..."
+        >
+
+        <button type="submit">
+
+            🔎 SEARCH
+
+        </button>
+
+    </form>
+
+
+    <!-- =========================
+         CLEAR ALL
+    ========================= -->
+
+    <div class="actions">
+
+        <form method="POST"
+              action="{{ url_for('clear_history') }}"
+              onsubmit="return confirm('Clear all history?');">
+
+            <button type="submit"
+                    class="clear-btn">
+
+                🗑️ CLEAR ALL
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================
+         HISTORY
+    ========================= -->
+
+    {% if histories %}
+
+        {% for item in histories %}
+
+        <div class="history-card">
+
+
+            <div class="card-top">
+
+                <div class="tool-name">
+
+                    {% if item["type"]|upper == "PASSWORD" %}
+
+                        🔐 PASSWORD ANALYZER
+
+                    {% elif item["type"]|upper == "URL" %}
+
+                        🌐 URL SCANNER
+
+                    {% elif item["type"]|upper == "EMAIL" %}
+
+                        📧 EMAIL DETECTOR
+
+                    {% elif item["type"]|upper == "IMAGE" %}
+
+                        🖼️ IMAGE MISUSE CHECKER
+
+                    {% elif item["type"]|upper == "CHAT" %}
+
+                        🤖 AI ASSISTANT CHAT
+
+                    {% else %}
+
+                        🛡️ CYBERSHIELD AI
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="date">
+
+                    {{ item["time"] }}
+
+                </div>
+
+            </div>
+
+
+            <div class="input-title">
+                Input / Search
+            </div>
+
+
+            <div class="input-value">
+
+                {{ item["input"] }}
+
+            </div>
+
+
+            <div class="result-grid">
+
+
+                <div class="result-box">
+
+                    <div class="result-label">
+                        Result
+                    </div>
+
+                    <div class="result-value">
+                        {{ item["result"] }}
+                    </div>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <div class="result-label">
+                        Risk
+                    </div>
+
+                    <div class="result-value">
+                        {{ item["risk"] or "N/A" }}
+                    </div>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <div class="result-label">
+                        Score
+                    </div>
+
+                    <div class="result-value">
+
+                        {{ item["score"]
+                           if item["score"] is not none
+                           else "N/A" }}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <form class="delete-form"
+                  method="POST"
+                  action="{{ url_for(
+                      'delete_history',
+                      history_id=item['id']
+                  ) }}">
+
+                <button type="submit"
+                        class="delete-btn">
+
+                    🗑️ DELETE
+
+                </button>
+
+            </form>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🕒
+            </div>
+
+            <h3>
+                No Search History Found
+            </h3>
+
+            <p style="margin-top:8px;">
+
+                Your security scans will appear here.
+
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+</main>
+
+
+</body>
+
+</html>

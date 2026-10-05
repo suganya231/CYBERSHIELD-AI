@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CyberShield AI - Search History</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(circle at top left, #102a43, transparent 35%),
+        radial-gradient(circle at bottom right, #32104f, transparent 35%),
+        #050814;
+
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    width: 100%;
+    padding: 20px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #080d1d;
+    border-bottom: 1px solid #00f5ff;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #00f5ff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+
+    padding: 10px 15px;
+
+    border: 1px solid rgba(0,245,255,0.4);
+    border-radius: 7px;
+}
+
+.nav-links a:hover {
+    background: #00f5ff;
+    color: black;
+}
+
+/* ================= MAIN ================= */
+
+.container {
+    width: 92%;
+    max-width: 1400px;
+    margin: 45px auto;
+}
+
+.title {
+    color: #00f5ff;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #9aa8bd;
+    margin-bottom: 35px;
+}
+
+/* ================= USER ================= */
+
+.user-box {
+
+    background: rgba(0,245,255,0.05);
+
+    border: 1px solid rgba(0,245,255,0.25);
+
+    padding: 15px 20px;
+
+    border-radius: 10px;
+
+    margin-bottom: 30px;
+
+    color: #9aa8bd;
+}
+
+.user-box strong {
+    color: #00f5ff;
+}
+
+/* ================= SECTION ================= */
+
+.history-section {
+
+    margin-bottom: 40px;
+}
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.section-title {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.email-title {
+    color: #ff4f81;
+}
+
+.url-title {
+    color: #00f5ff;
+}
+
+.password-title {
+    color: #00ff88;
+}
+
+.image-title {
+    color: #ffd166;
+}
+
+/* ================= CARD ================= */
+
+.card {
+
+    background: rgba(10,18,40,0.95);
+
+    border:
+        1px solid rgba(0,245,255,0.25);
+
+    border-radius: 15px;
+
+    overflow-x: auto;
+}
+
+/* ================= TABLE ================= */
+
+table {
+
+    width: 100%;
+
+    min-width: 900px;
+
+    border-collapse: collapse;
+}
+
+th {
+
+    background:
+        rgba(0,245,255,0.10);
+
+    color: #00f5ff;
+
+    padding: 16px;
+
+    text-align: left;
+}
+
+td {
+
+    padding: 15px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.08);
+
+    color: #dbe4f2;
+}
+
+tr:hover {
+
+    background:
+        rgba(0,245,255,0.05);
+}
+
+/* ================= RESULT ================= */
+
+.result {
+
+    max-width: 350px;
+
+    word-break: break-word;
+}
+
+/* ================= RISK ================= */
+
+.low {
+
+    color: #00ff88;
+
+    font-weight: bold;
+}
+
+.medium {
+
+    color: #ffd166;
+
+    font-weight: bold;
+}
+
+.high {
+
+    color: #ff4f81;
+
+    font-weight: bold;
+}
+
+/* ================= EMPTY ================= */
+
+.empty {
+
+    text-align: center;
+
+    padding: 45px 20px;
+
+    color: #8b98ad;
+}
+
+.empty-icon {
+
+    font-size: 35px;
+
+    margin-bottom: 10px;
+}
+
+.empty h3 {
+
+    color: #00f5ff;
+
+    margin-bottom: 8px;
+}
+
+/* ================= CLEAR ================= */
+
+.clear-area {
+
+    margin-bottom: 35px;
+
+    text-align: right;
+}
+
+.clear-btn {
+
+    padding: 12px 20px;
+
+    background: transparent;
+
+    color: #ff4f81;
+
+    border:
+        1px solid #ff4f81;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.clear-btn:hover {
+
+    background: #ff4f81;
+
+    color: white;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+
+    text-align: center;
+
+    color: #657188;
+
+    padding: 30px;
+
+    font-size: 12px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 800px) {
+
+    .navbar {
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .container {
+
+        width: 95%;
+
+        margin: 25px auto;
+    }
+
+    .title {
+
+        font-size: 24px;
+    }
+
+    .section-title {
+
+        font-size: 18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        CYBER<span>SHIELD</span> AI
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/explore">
+            Explore
+        </a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/chat">
+            AI Chat
+        </a>
+
+        <a href="/search_history">
+            Search History
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <div class="title">
+
+        SEARCH HISTORY
+
+    </div>
+
+
+    <div class="subtitle">
+
+        View your Email, URL, Password and Image Misuse
+        security analysis history separately.
+
+    </div>
+
+
+    <!-- USER -->
+
+    <div class="user-box">
+
+        👤 Logged in User:
+
+        <strong>
+
+            {{ session.get("username", "User") }}
+
+        </strong>
+
+    </div>
+
+
+    <!-- CLEAR ALL -->
+
+    <div class="clear-area">
+
+        <form
+            method="POST"
+            action="/clear_search_history"
+            onsubmit="return confirm('Clear ALL search history?');"
+        >
+
+            <button
+                class="clear-btn"
+                type="submit"
+            >
+
+                🗑 CLEAR ALL HISTORY
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- EMAIL HISTORY -->
+    <!-- ================================================= -->
+
+    <div class="history-section">
+
+
+        <div class="section-header">
+
+            <div class="section-title email-title">
+
+                📧 EMAIL SEARCH HISTORY
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+        {% if email_history %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>EMAIL INPUT</th>
+
+                    <th>RESULT</th>
+
+                    <th>RISK</th>
+
+                    <th>SCORE</th>
+
+                    <th>DATE & TIME</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in email_history %}
+
+            <tr>
+
+                <td>
+                    {{ loop.index }}
+                </td>
+
+                <td>
+                    {{ item["input_data"] or "-" }}
+                </td>
+
+                <td class="result">
+                    {{ item["result"] or "-" }}
+                </td>
+
+                <td>
+
+                    {% if item["risk"]|lower == "low" %}
+
+                        <span class="low">
+                            LOW
+                        </span>
+
+                    {% elif item["risk"]|lower == "medium" %}
+
+                        <span class="medium">
+                            MEDIUM
+                        </span>
+
+                    {% elif item["risk"]|lower == "high" %}
+
+                        <span class="high">
+                            HIGH
+                        </span>
+
+                    {% else %}
+
+                        {{ item["risk"] or "-" }}
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+                    {{ item["score"] or "-" }}
+                </td>
+
+                <td>
+                    {{ item["created_at"] or "-" }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📧
+            </div>
+
+            <h3>
+                NO EMAIL SEARCH HISTORY
+            </h3>
+
+            <p>
+                Email detector searches will appear here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- URL HISTORY -->
+    <!-- ================================================= -->
+
+    <div class="history-section">
+
+
+        <div class="section-header">
+
+            <div class="section-title url-title">
+
+                🌐 URL SEARCH HISTORY
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+        {% if url_history %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>URL</th>
+
+                    <th>RESULT</th>
+
+                    <th>RISK</th>
+
+                    <th>SCORE</th>
+
+                    <th>DATE & TIME</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in url_history %}
+
+            <tr>
+
+                <td>
+                    {{ loop.index }}
+                </td>
+
+                <td class="result">
+                    {{ item["input_data"] or "-" }}
+                </td>
+
+                <td class="result">
+                    {{ item["result"] or "-" }}
+                </td>
+
+                <td>
+
+                    {% if item["risk"]|lower == "low" %}
+
+                        <span class="low">
+                            LOW
+                        </span>
+
+                    {% elif item["risk"]|lower == "medium" %}
+
+                        <span class="medium">
+                            MEDIUM
+                        </span>
+
+                    {% elif item["risk"]|lower == "high" %}
+
+                        <span class="high">
+                            HIGH
+                        </span>
+
+                    {% else %}
+
+                        {{ item["risk"] or "-" }}
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+                    {{ item["score"] or "-" }}
+                </td>
+
+                <td>
+                    {{ item["created_at"] or "-" }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🌐
+            </div>
+
+            <h3>
+                NO URL SEARCH HISTORY
+            </h3>
+
+            <p>
+                URL scanner searches will appear here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- PASSWORD HISTORY -->
+    <!-- ================================================= -->
+
+    <div class="history-section">
+
+
+        <div class="section-header">
+
+            <div class="section-title password-title">
+
+                🔐 PASSWORD SEARCH HISTORY
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+        {% if password_history %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>PASSWORD</th>
+
+                    <th>RESULT</th>
+
+                    <th>RISK</th>
+
+                    <th>SCORE</th>
+
+                    <th>DATE & TIME</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in password_history %}
+
+            <tr>
+
+                <td>
+                    {{ loop.index }}
+                </td>
+
+                <td>
+                    ••••••••••••
+                </td>
+
+                <td class="result">
+                    {{ item["result"] or "-" }}
+                </td>
+
+                <td>
+
+                    {% if item["risk"]|lower == "low" %}
+
+                        <span class="low">
+                            LOW
+                        </span>
+
+                    {% elif item["risk"]|lower == "medium" %}
+
+                        <span class="medium">
+                            MEDIUM
+                        </span>
+
+                    {% elif item["risk"]|lower == "high" %}
+
+                        <span class="high">
+                            HIGH
+                        </span>
+
+                    {% else %}
+
+                        {{ item["risk"] or "-" }}
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+                    {{ item["score"] or "-" }}
+                </td>
+
+                <td>
+                    {{ item["created_at"] or "-" }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🔐
+            </div>
+
+            <h3>
+                NO PASSWORD SEARCH HISTORY
+            </h3>
+
+            <p>
+                Password analyzer searches will appear here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- IMAGE MISUSE HISTORY -->
+    <!-- ================================================= -->
+
+    <div class="history-section">
+
+
+        <div class="section-header">
+
+            <div class="section-title image-title">
+
+                🖼️ IMAGE MISUSE SEARCH HISTORY
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+        {% if misuse_history %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>IMAGE</th>
+
+                    <th>RESULT</th>
+
+                    <th>RISK</th>
+
+                    <th>SCORE</th>
+
+                    <th>DATE & TIME</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in misuse_history %}
+
+            <tr>
+
+                <td>
+                    {{ loop.index }}
+                </td>
+
+                <td>
+                    {{ item["input_data"] or "Uploaded Image" }}
+                </td>
+
+                <td class="result">
+                    {{ item["result"] or "-" }}
+                </td>
+
+                <td>
+
+                    {% if item["risk"]|lower == "low" %}
+
+                        <span class="low">
+                            LOW
+                        </span>
+
+                    {% elif item["risk"]|lower == "medium" %}
+
+                        <span class="medium">
+                            MEDIUM
+                        </span>
+
+                    {% elif item["risk"]|lower == "high" %}
+
+                        <span class="high">
+                            HIGH
+                        </span>
+
+                    {% else %}
+
+                        {{ item["risk"] or "-" }}
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+                    {{ item["score"] or "-" }}
+                </td>
+
+                <td>
+                    {{ item["created_at"] or "-" }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🖼️
+            </div>
+
+            <h3>
+                NO IMAGE MISUSE HISTORY
+            </h3>
+
+            <p>
+                Image misuse checks will appear here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<div class="footer">
+
+    CYBERSHIELD AI v2.0
+    • ADVANCED THREAT DETECTION SYSTEM
+
+</div>
+
+
+</body>
+
+</html>

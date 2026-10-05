@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CyberShield AI - URL Phishing Scanner</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #102b55, #06152d 45%, #020914);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* HEADER */
+
+.header {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 45px;
+    background: rgba(1, 8, 20, 0.96);
+    border-bottom: 1px solid rgba(0, 200, 255, 0.25);
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #00e5ff;
+}
+
+.logo span {
+    color: white;
+    font-size: 9px;
+    margin-left: 8px;
+}
+
+.nav a {
+    color: #b9c9df;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+}
+
+.nav a:hover {
+    color: #00e5ff;
+}
+
+/* MAIN */
+
+.container {
+    width: 90%;
+    max-width: 950px;
+    margin: 50px auto;
+}
+
+/* TITLE */
+
+.title-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title-icon {
+    font-size: 50px;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 44px;
+    color: #00e5ff;
+    text-shadow: 0 0 15px rgba(0,229,255,0.5);
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #8faed2;
+    font-size: 15px;
+}
+
+/* CARD */
+
+.card {
+    position: relative;
+    background: linear-gradient(
+        145deg,
+        rgba(10,35,70,0.96),
+        rgba(4,20,42,0.96)
+    );
+    border: 1px solid rgba(0,200,255,0.35);
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 0 35px rgba(0,150,255,0.12);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        #00e5ff,
+        #2563eb,
+        #a020f0
+    );
+}
+
+/* CARD HEADER */
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.icon-box {
+    width: 55px;
+    height: 55px;
+    border: 1px solid rgba(0,200,255,0.5);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: rgba(0,180,255,0.08);
+}
+
+.card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+}
+
+.card-description {
+    color: #7ea0c8;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* INPUT */
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #dcecff;
+    font-size: 14px;
+}
+
+input[type="text"] {
+    width: 100%;
+    height: 55px;
+    padding: 0 18px;
+    border-radius: 10px;
+    border: 1px solid #24537c;
+    background: #020b19;
+    color: white;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+input[type="text"]:focus {
+    border-color: #00e5ff;
+    box-shadow: 0 0 15px rgba(0,229,255,0.15);
+}
+
+input::placeholder {
+    color: #64748b;
+}
+
+/* BUTTON */
+
+.scan-button {
+    width: 100%;
+    height: 55px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    background: linear-gradient(
+        90deg,
+        #06b6d4,
+        #2563eb,
+        #a020f0
+    );
+    transition: 0.3s;
+}
+
+.scan-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,180,255,0.3);
+}
+
+/* ERROR */
+
+.error {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #ef4444;
+    background: rgba(239,68,68,0.08);
+    color: #ff7777;
+}
+
+/* RESULT */
+
+.result {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 14px;
+    background: rgba(2,12,28,0.8);
+    border: 1px solid rgba(0,200,255,0.25);
+}
+
+.result-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.safe {
+    color: #22c55e;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.medium {
+    color: #f59e0b;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.high {
+    color: #ef4444;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* SCORE */
+
+.score-area {
+    margin: 22px 0;
+}
+
+.score-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #b5c7df;
+    font-size: 13px;
+}
+
+.progress {
+    width: 100%;
+    height: 12px;
+    border-radius: 20px;
+    background: #071426;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(
+        90deg,
+        #00e5ff,
+        #2563eb,
+        #ef4444
+    );
+}
+
+/* INFO */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.info-box {
+    padding: 16px;
+    border-radius: 10px;
+    background: rgba(12,34,62,0.7);
+    border: 1px solid rgba(100,160,220,0.18);
+}
+
+.info-label {
+    font-size: 11px;
+    color: #7894b5;
+    text-transform: uppercase;
+}
+
+.info-value {
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+/* REASONS */
+
+.reasons {
+    margin-top: 25px;
+}
+
+.reasons h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.reason {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: rgba(239,68,68,0.06);
+    border-left: 3px solid #ef4444;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    margin: 50px 0 30px;
+    color: #547092;
+    font-size: 12px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .container {
+        width: 94%;
+        margin-top: 30px;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+        🛡️ CYBERSHIELD AI
+        <span>MILITARY GRADE V2.0</span>
+    </div>
+
+    <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/password">Password</a>
+        <a href="/url">URL Scanner</a>
+        <a href="/dashboard">Dashboard</a>
+    </nav>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+    <!-- TITLE -->
+
+    <section class="title-section">
+
+        <div class="title-icon">
+            🌐
+        </div>
+
+        <h1 class="title">
+            URL PHISHING SCANNER
+        </h1>
+
+        <p class="subtitle">
+            Advanced URL Threat & Security Analysis
+        </p>
+
+    </section>
+
+
+    <!-- SCANNER CARD -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div class="icon-box">
+                🌐
+            </div>
+
+            <div>
+
+                <div class="card-title">
+                    DEEP URL THREAT SCANNER
+                </div>
+
+                <div class="card-description">
+                    Multi-layer URL analysis •
+                    Phishing detection •
+                    Suspicious domain analysis
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form action="/check_url" method="POST">
+
+            <label>
+                Enter URL to analyze
+            </label>
+
+            <input
+                type="text"
+                name="url"
+                placeholder="Enter URL e.g. https://example.com"
+                value="{{ url_input|default('') }}"
+                autocomplete="off"
+                required
+            >
+
+            <button
+                type="submit"
+                class="scan-button"
+            >
+                🔍 &nbsp; DEEP SCAN URL
+            </button>
+
+        </form>
+
+
+        <!-- ERROR -->
+
+        {% if url_error %}
+
+        <div class="error">
+            ⚠️ {{ url_error }}
+        </div>
+
+        {% endif %}
+
+
+        <!-- RESULT -->
+
+        {% if url_result %}
+
+        <div class="result">
+
+            <div class="result-title">
+                🔎 SCAN RESULT
+            </div>
+
+
+            {% if url_risk == "LOW" %}
+
+            <div class="safe">
+                🟢 {{ url_status }}
+            </div>
+
+            {% elif url_risk == "MEDIUM" %}
+
+            <div class="medium">
+                🟡 {{ url_status }}
+            </div>
+
+            {% else %}
+
+            <div class="high">
+                🔴 {{ url_status }}
+            </div>
+
+            {% endif %}
+
+
+            <!-- SCORE -->
+
+            <div class="score-area">
+
+                <div class="score-label">
+
+                    <span>
+                        Threat Analysis Score
+                    </span>
+
+                    <strong>
+                        {{ url_score }}%
+                    </strong>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: {{ url_score }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="info-grid">
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Risk Level
+                    </div>
+
+                    <div class="info-value">
+                        {{ url_risk }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        URL Scanned
+                    </div>
+
+                    <div
+                        class="info-value"
+                        style="word-break:break-all;font-size:12px;"
+                    >
+                        {{ url_input }}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY REASONS -->
+
+            <div class="reasons">
+
+                <h3>
+                    🛡️ Security Analysis
+                </h3>
+
+                {% for reason in url_reasons %}
+
+                <div class="reason">
+                    ⚠️ {{ reason }}
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Built with Python • Flask • Scikit-Learn
+
+        <br><br>
+
+        🖤 CyberShield AI v2.0
+
+    </div>
+
+</main>
+
+</body>
+</html>
